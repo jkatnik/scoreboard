@@ -2,6 +2,7 @@ package com.sportradar.scoreboard;
 
 import org.junit.jupiter.api.Test;
 
+import static com.sportradar.scoreboard.ScoreboardAssembler.givenGame;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ByScoreAndTimeMatchComparatorTest {
@@ -30,9 +31,5 @@ class ByScoreAndTimeMatchComparatorTest {
     int result = comparator.compare(game1, game2);
     // then
     assertThat(result).isLessThan(0);
-  }
-
-  private Game givenGame(String home, String away, int homeScore, int awayScore) {
-    return new Game(home, away).updateScore(homeScore, awayScore);
   }
 }

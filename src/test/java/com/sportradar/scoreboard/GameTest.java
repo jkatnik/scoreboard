@@ -38,4 +38,10 @@ class GameTest {
     assertThat(updatedGame.homeScore()).isEqualTo(homeScore);
     assertThat(updatedGame.awayScore()).isEqualTo(awayScore);
   }
+
+  @Test
+  void shouldGetKey() {
+    var game = new Game("Home", "Away");
+    assertThat(game.getKey()).isEqualTo("Home-Away");
+  }
 }

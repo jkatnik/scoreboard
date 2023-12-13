@@ -2,8 +2,11 @@ package com.sportradar.scoreboard;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 final class SortableScoreboard implements Scoreboard {
+  private final ConcurrentMap<String, Game> games = new ConcurrentHashMap<>();
   private final Comparator<Game> matchComparator;
 
   SortableScoreboard(Comparator<Game> matchComparator) {
@@ -12,7 +15,10 @@ final class SortableScoreboard implements Scoreboard {
 
   @Override
   public void startGame(String homeTeam, String awayTeam) {
-    throw new UnsupportedOperationException("Not implemented yet.");
+    validateTeamNames(homeTeam, awayTeam);
+
+    Game game = new Game(homeTeam, awayTeam);
+    games.put(game.getKey(), game);
   }
 
   @Override
@@ -26,6 +32,22 @@ final class SortableScoreboard implements Scoreboard {
   }
 
   public List<Game> getSummary() {
-    throw new UnsupportedOperationException("Not implemented yet.");
+    return games.values().stream()
+      .sorted(matchComparator)
+      .toList();
+  }
+
+  private void validateTeamNames(String homeTeam, String awayTeam) {
+    if (homeTeam.equals(awayTeam)) {
+      throw new IllegalArgumentException("Home and away team names must be different.");
+    }
+
+    if (homeTeam.isEmpty()) {
+      throw new IllegalArgumentException("Home team name must not be empty.");
+    }
+
+    if (awayTeam.isEmpty()) {
+      throw new IllegalArgumentException("Away team name must not be empty.");
+    }
   }
 }

@@ -14,4 +14,8 @@ public record Game(
   public Game updateScore(int updatedHomeScore, int updatedAwayScore) {
     return new Game(homeTeam, awayTeam, updatedHomeScore, updatedAwayScore, startTime);
   }
+
+  public String getKey() {
+    return homeTeam + "-" + awayTeam;
+  }
 }
