@@ -4,16 +4,21 @@ import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.Clock;
+import java.time.ZoneId;
+
 import static com.sportradar.scoreboard.ScoreboardAssembler.given;
 import static com.sportradar.scoreboard.ScoreboardAssembler.givenGame;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SortableScoreboardTest {
   private Scoreboard scoreboard;
+  private Clock clock;
 
   @BeforeEach
   void setUp() {
-    scoreboard = ScoreboardFactory.createDefaultSortedScoreboard();
+    clock = new TestClock();
+    scoreboard = ScoreboardFactory.createDefaultSortedScoreboard(clock);
   }
 
   @Test

@@ -7,8 +7,8 @@ public record Game(
   int awayScore,
   long startTime) {
 
-  public Game(String homeTeam, String awayTeam) {
-    this(homeTeam, awayTeam, 0, 0, System.currentTimeMillis());
+  public Game(String homeTeam, String awayTeam, long startTime) {
+    this(homeTeam, awayTeam, 0, 0, startTime);
   }
 
   public Game updateScore(int updatedHomeScore, int updatedAwayScore) {

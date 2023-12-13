@@ -2,6 +2,7 @@ package com.sportradar.scoreboard;
 
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,23 +14,24 @@ class GameTest {
   @Test
   void shouldCreateGame() {
     // when
-    Game game = new Game("Home", "Away");
+    Game game = new Game("Home", "Away", 100);
 
     // then
     assertThat(game.homeTeam()).isEqualTo("Home");
     assertThat(game.awayTeam()).isEqualTo("Away");
     assertThat(game.homeScore()).isEqualTo(0);
     assertThat(game.awayScore()).isEqualTo(0);
-    assertThat(game.startTime()).isCloseTo(System.currentTimeMillis(), SMALL_TIME_OFFSET);
+    assertThat(game.startTime()).isEqualTo(100);
   }
 
+  @ParameterizedTest
   @CsvSource({
     "1, 0",
     "0, 1",
   })
   void shouldUpdateScore(int homeScore, int awayScore) {
     // given
-    var game = new Game("Home", "Away");
+    var game = new Game("Home", "Away", 100);
 
     // when
     var updatedGame = game.updateScore(homeScore, awayScore);
@@ -41,7 +43,7 @@ class GameTest {
 
   @Test
   void shouldGetKey() {
-    var game = new Game("Home", "Away");
+    var game = new Game("Home", "Away", 100);
     assertThat(game.getKey()).isEqualTo("Home-Away");
   }
 

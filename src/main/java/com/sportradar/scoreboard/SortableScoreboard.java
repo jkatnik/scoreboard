@@ -1,5 +1,6 @@
 package com.sportradar.scoreboard;
 
+import java.time.Clock;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,16 +9,18 @@ import java.util.concurrent.ConcurrentMap;
 final class SortableScoreboard implements Scoreboard {
   private final ConcurrentMap<String, Game> games = new ConcurrentHashMap<>();
   private final Comparator<Game> matchComparator;
+  private final Clock clock;
 
-  SortableScoreboard(Comparator<Game> matchComparator) {
+  SortableScoreboard(Comparator<Game> matchComparator, Clock clock) {
     this.matchComparator = matchComparator;
+    this.clock = clock;
   }
 
   @Override
   public void startGame(String homeTeam, String awayTeam) {
     validateTeamNames(homeTeam, awayTeam);
 
-    Game game = new Game(homeTeam, awayTeam);
+    Game game = new Game(homeTeam, awayTeam, clock.instant().toEpochMilli());
     games.put(game.getKey(), game);
   }
 
