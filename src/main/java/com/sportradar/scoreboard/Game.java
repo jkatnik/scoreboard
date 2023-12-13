@@ -16,6 +16,10 @@ public record Game(
   }
 
   public String getKey() {
+    return Game.getKey(homeTeam, awayTeam);
+  }
+
+  public static String getKey(String homeTeam, String awayTeam) {
     return homeTeam + "-" + awayTeam;
   }
 }

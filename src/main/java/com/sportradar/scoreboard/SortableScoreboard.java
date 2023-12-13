@@ -23,7 +23,15 @@ final class SortableScoreboard implements Scoreboard {
 
   @Override
   public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
-    throw new UnsupportedOperationException("Not implemented yet.");
+    validateTeamNames(homeTeam, awayTeam);
+
+    String key = Game.getKey(homeTeam, awayTeam);
+    Game existingGame = games.get(key);
+    if (existingGame == null) {
+      throw new IllegalArgumentException("Match not found for teams: " + homeTeam + " vs " + awayTeam + ".");
+    }
+
+    games.put(key, existingGame.updateScore(homeScore, awayScore));
   }
 
   @Override

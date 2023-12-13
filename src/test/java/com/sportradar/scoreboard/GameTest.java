@@ -44,4 +44,10 @@ class GameTest {
     var game = new Game("Home", "Away");
     assertThat(game.getKey()).isEqualTo("Home-Away");
   }
+
+  @Test
+  void shouldGetStaticKey() {
+    var key = Game.getKey("Home", "Home");
+    assertThat(key).isEqualTo("Home-Home");
+  }
 }
