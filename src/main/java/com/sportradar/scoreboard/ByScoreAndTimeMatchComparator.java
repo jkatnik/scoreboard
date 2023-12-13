@@ -6,7 +6,7 @@ package com.sportradar.scoreboard;
 final class ByScoreAndTimeMatchComparator implements MatchComparator {
   @Override
   public int compare(Game m1, Game m2) {
-    int scoreCompare = compareScore(m1, m2);
+    int scoreCompare = compareScore(m2, m1);
 
     if (scoreCompare != 0) {
       return scoreCompare;
