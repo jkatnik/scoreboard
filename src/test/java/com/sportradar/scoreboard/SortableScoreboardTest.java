@@ -69,8 +69,8 @@ class SortableScoreboardTest {
     // given
     given(scoreboard)
       .withGame("Home1", "Away1", 1, 0) // total score 1 - should be last
-      .withGame("Home2", "Away2", 1, 1) // total score 2, started earlier - should be first
-      .withGame("Home3", "Away3", 1, 1); // total score 2, started later - should be second
+      .withGame("Home2", "Away2", 1, 1) // total score 2, started earlier - should be second
+      .withGame("Home3", "Away3", 1, 1); // total score 2, started later - should be first
 
     // when
     var summary = scoreboard.getSummary();
@@ -78,7 +78,7 @@ class SortableScoreboardTest {
     // then
     assertThat(summary)
       .extracting(Game::getKey)
-      .containsExactly("Home2-Away2", "Home3-Away3", "Home1-Away1");
+      .containsExactly("Home3-Away3", "Home2-Away2", "Home1-Away1");
   }
 
   @Test

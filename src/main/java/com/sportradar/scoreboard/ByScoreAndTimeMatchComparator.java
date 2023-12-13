@@ -11,7 +11,7 @@ final class ByScoreAndTimeMatchComparator implements MatchComparator {
     if (scoreCompare != 0) {
       return scoreCompare;
     }
-    return Long.compare(m1.startTime(), m2.startTime());
+    return Long.compare(m2.startTime(), m1.startTime());
   }
 
   private int compareScore(Game m1, Game m2) {

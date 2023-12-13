@@ -13,8 +13,17 @@ public class ScoreboardAssembler {
 
   public ScoreboardAssembler withGame(String home, String away, int homeScore, int awayScore) {
     scoreboard.startGame(home, away);
+    sleep();
     scoreboard.updateScore(home, away, homeScore, awayScore);
     return this;
+  }
+
+  private void sleep() {
+    try {
+      Thread.sleep(1);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   public ScoreboardAssembler startGame(String home, String away) {

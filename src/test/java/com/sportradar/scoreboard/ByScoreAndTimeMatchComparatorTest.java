@@ -29,7 +29,8 @@ class ByScoreAndTimeMatchComparatorTest {
 
     // when
     int result = comparator.compare(game1, game2);
+
     // then
-    assertThat(result).isLessThan(0);
+    assertThat(result).isGreaterThan(0);
   }
 }
