@@ -83,6 +83,20 @@ class SortableScoreboardTest {
 
   @Test
   void testFinishGame() {
+    //given
+    given(scoreboard)
+      .withGame("Home1", "Away1", 1, 0)
+      .withGame("Home2", "Away2", 1, 1)
+      .withGame("Home3", "Away3", 1, 1);
+
+    // when
+    scoreboard.finishGame("Home2", "Away2");
+
+    // then
+    var summary = scoreboard.getSummary();
+    assertThat(summary)
+      .extracting(Game::getKey)
+      .containsExactly("Home3-Away3", "Home1-Away1");
   }
 
   private static Condition<Game> teamAndScoresEqual(Game expectedGame) {

@@ -36,7 +36,9 @@ final class SortableScoreboard implements Scoreboard {
 
   @Override
   public void finishGame(String homeTeam, String awayTeam) {
-    throw new UnsupportedOperationException("Not implemented yet.");
+    validateTeamNames(homeTeam, awayTeam);
+
+    games.remove(Game.getKey(homeTeam, awayTeam));
   }
 
   public List<Game> getSummary() {
